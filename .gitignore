@@ -457,5 +457,10 @@ $RECYCLE.BIN/
 ## File used for secret keys
 ##
 API/appsettings.json
+
+##
+## Development database files
+##
 API/jackfrost.db-shm
 API/jackfrost.db-wal
+API/jackfrost.db
