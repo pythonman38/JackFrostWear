@@ -12,27 +12,28 @@ import 'react-toastify/dist/ReactToastify.css';
 import ServerError from "../errors/ServerError";
 import NotFound from "../errors/NotFound";
 import CartPage from "../../features/cart/CartPage";
-import { useStoreContext } from "../context/StoreContext";
 import { getCookie } from "../utilities/util";
 import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponent";
 import CheckoutPage from "../../features/checkout/CheckoutPage";
+import { useAppDispatch } from "../store/configureStore";
+import { setCart } from "../../features/cart/cartSlice";
 
 function App() {
-  const { setCart } = useStoreContext();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const buyerId = getCookie('buyerId');
     if (buyerId) {
       agent.Cart.get()
-        .then(cart => setCart(cart))
+        .then(cart => dispatch(setCart(cart)))
         .catch(error => console.log(error))
         .finally(() => setLoading(false))
     } else {
       setLoading(false);
     }
-  }, [setCart])
+  }, [dispatch])
 
   const [darkMode, setDarkMode] = useState(false);
   const paletteType = darkMode ? 'dark' : 'light';

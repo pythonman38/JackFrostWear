@@ -34,13 +34,13 @@ namespace API.Controllers
             if (cart == null) cart = CreateCart();
 
             var product = await _context.Products.FindAsync(productId);
-            if (product == null) return NotFound();
+            if (product == null) return BadRequest(new ProblemDetails { Title = "Product Not Found!" });
             cart.AddItem(product, quantity);
 
             var result = await _context.SaveChangesAsync() > 0;
             if (result) return CreatedAtRoute("GetCart", MapCartToDto(cart));
-            
-            return BadRequest(new ProblemDetails{Title = "Problem saving item to shopping cart!"});
+
+            return BadRequest(new ProblemDetails { Title = "Problem saving item to shopping cart!" });
         }
 
         [HttpDelete]
@@ -55,7 +55,7 @@ namespace API.Controllers
             var result = await _context.SaveChangesAsync() > 0;
             if (result) return Ok();
 
-            return BadRequest(new ProblemDetails{Title = "Problem removing item from the shopping cart!"});
+            return BadRequest(new ProblemDetails { Title = "Problem removing item from the shopping cart!" });
         }
 
         private async Task<Cart> RetrieveCart()
@@ -77,7 +77,7 @@ namespace API.Controllers
             return cart;
         }
 
-           private CartDto MapCartToDto(Cart cart)
+        private CartDto MapCartToDto(Cart cart)
         {
             return new CartDto
             {
