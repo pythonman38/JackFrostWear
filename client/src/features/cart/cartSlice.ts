@@ -1,4 +1,3 @@
-import { StaticDatePicker } from "@mui/lab";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import agent from "../../app/api/agent";
 import { Cart } from "../../app/models/cart";
