@@ -12,14 +12,32 @@ namespace API.Data
         {
             if (!userManager.Users.Any())
             {
-                var user = new User
+                var userBob = new User
                 {
                     UserName = "bob",
                     Email = "bob@test.com"
                 };
 
-                await userManager.CreateAsync(user, "Pa$$w0rd");
-                await userManager.AddToRoleAsync(user, "Member");
+                await userManager.CreateAsync(userBob, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(userBob, "Member");
+
+                var userJim = new User
+                {
+                    UserName = "jim",
+                    Email = "jim@test.com"
+                };
+
+                await userManager.CreateAsync(userJim, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(userJim, "Member");
+
+                var userSam = new User
+                {
+                    UserName = "sam",
+                    Email = "sam@test.com"
+                };
+
+                await userManager.CreateAsync(userSam, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(userSam, "Member");
 
                 var admin = new User
                 {
